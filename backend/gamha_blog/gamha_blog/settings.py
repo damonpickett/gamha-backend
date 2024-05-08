@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 from google.oauth2 import service_account
 from google.cloud import secretmanager
 import json
+import django_heroku
 
 load_dotenv()
 
@@ -256,3 +257,5 @@ CKEDITOR_5_CONFIGS = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+django_heroku.settings(locals())
