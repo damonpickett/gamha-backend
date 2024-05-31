@@ -1,15 +1,9 @@
 # Ignore Django related files and directories
-/backend/venv/
-/backend/db.sqlite3
-/backend/__pycache__/
-/backend/*.pyc
-/backend/.env
-
-# Ignore Node.js related files and directories
-/frontend/node_modules/
-/frontend/.eslintcache
-/frontend/.env
-/frontend/build/
+venv/
+db.sqlite3
+__pycache__/
+*.pyc
+.env
 
 # Ignore any compiled files
 *.pyc
