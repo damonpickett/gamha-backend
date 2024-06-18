@@ -88,21 +88,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "gamha_blog.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -146,22 +131,48 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #     BASE_DIR / 'static',
 # ]
 
+
+# Load environment variables from Heroku
+PROJECT_ID = os.getenv('PROJECT_ID')
+SECRET_ID = os.getenv('SECRET_ID')
+GOOGLE_CREDENTIALS_JSON = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+
+# Ensure required environment variables are set
+if not PROJECT_ID or not SECRET_ID:
+    raise ValueError("Missing Google Cloud project ID or secret ID")
+
+if not GOOGLE_CREDENTIALS_JSON:
+    raise EnvironmentError("GOOGLE_APPLICATION_CREDENTIALS environment variable not set")
+
+service_account_info = json.loads(GOOGLE_CREDENTIALS_JSON)
+GS_CREDENTIALS = service_account.Credentials.from_service_account_info(service_account_info)
+
+def get_secret(project_id, secret_id):
+    client = secretmanager.SecretManagerServiceClient(credentials=GS_CREDENTIALS)
+    name = f"projects/{project_id}/secrets/{secret_id}/versions/latest"
+    response = client.access_secret_version(request={"name": name})
+    return response.payload.data.decode("UTF-8")
+
+# Database
+# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+    }
+}
+
 # Images
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'gamha-bucket'
 
-def get_secret(project_id, secret_id):
-    client = secretmanager.SecretManagerServiceClient()
-    secret_name = f"projects/{project_id}/secrets/{secret_id}/versions/latest"
-    response = client.access_secret_version(request={"name": secret_name})
-    keyfile_path = response.payload.data.decode('UTF-8')
-    print(f"KEYFILE PATH: {keyfile_path}")
-    with open(keyfile_path) as keyfile:
-        keyfile_dict = json.load(keyfile)
-    credentials = service_account.Credentials.from_service_account_info(keyfile_dict)
-    return credentials
-
-GS_CREDENTIALS = get_secret(os.getenv('PROJECT_ID'), os.getenv('SECRET_ID'))
+DEBUG = False
+ALLOWED_HOSTS = ['gamha-blog.herokuapp.com', 'localhost']
 
 customColorPalette = [
     {
