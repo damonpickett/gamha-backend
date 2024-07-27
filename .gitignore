@@ -47,3 +47,5 @@ fonts
 migrations
 
 app.yaml
+
+/credentials/
