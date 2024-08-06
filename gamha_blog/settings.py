@@ -123,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://storage.googleapis.com/your-bucket-name/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Additional locations of static files
