@@ -172,7 +172,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'gamha-bucket'
 
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['gamha-blog.herokuapp.com', 'localhost']
 
 customColorPalette = [
