@@ -32,6 +32,7 @@ Thumbs.db
 
 migrate-to-postgres-guide.md
 chatgpt-guide.md
+guide.md
 notes.md
 react-blog-guide.md
 css-best-practices.md
@@ -47,3 +48,5 @@ fonts
 migrations
 
 app.yaml
+
+/credentials/
