@@ -133,8 +133,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Load environment variables from Heroku
-PROJECT_ID = os.getenv('GOOGLE_CLOUD_PROJECT_ID')
-SECRET_ID = os.getenv('GOOGLE_CLOUD_SECRET_ID')
+PROJECT_ID = os.getenv('PROJECT_ID')
+SECRET_ID = os.getenv('SECRET_ID')
 GOOGLE_CREDENTIALS_JSON = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
 # Ensure required environment variables are set
