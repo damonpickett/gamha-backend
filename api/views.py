@@ -24,3 +24,6 @@ class PostViewSet(viewsets.ModelViewSet):
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all().order_by('order')
     serializer_class = BookSerializer
+
+def home(request):
+    return HttpResponse("Welcome to the Home Page")
