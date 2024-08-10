@@ -50,3 +50,5 @@ migrations
 app.yaml
 
 /credentials/
+
+staticfiles/
