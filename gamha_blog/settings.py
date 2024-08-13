@@ -67,7 +67,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'gamha-blog.herokuapp.com',
+    'https://gamha-blog.herokuapp.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
