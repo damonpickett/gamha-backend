@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-fdz@m=x1yg@*n2f42_y5+94q42ht9dpc(1=f86gkd0ulw0&yal"
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -180,8 +180,6 @@ DATABASES = {
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'gamha-bucket'
 
-
-DEBUG = False
 ALLOWED_HOSTS = ['gamha-blog.herokuapp.com', 'localhost', '127.0.0.1']
 
 customColorPalette = [
