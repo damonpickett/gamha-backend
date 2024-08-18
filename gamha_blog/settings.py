@@ -17,6 +17,7 @@ from google.oauth2 import service_account
 from google.cloud import secretmanager
 import json
 import django_heroku
+import dj_database_url
 
 load_dotenv()
 
@@ -165,6 +166,7 @@ def get_secret(project_id, secret_id):
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Default to local database settings
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -175,6 +177,11 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
+
+# Override with Heroku's database settings if DATABASE_URL is set
+DATABASE_URL = os.getenv('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
 
 # Images
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
