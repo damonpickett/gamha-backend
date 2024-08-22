@@ -69,6 +69,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'https://gamha-blog-a5a35bdb1d4a.herokuapp.com',
+    'https://gamha-frontend.vercel.app',
+    'https://gamha.xyz',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
