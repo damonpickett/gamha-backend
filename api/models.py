@@ -14,7 +14,7 @@ class Post(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['originally_published']
+        ordering = ['-originally_published']
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
